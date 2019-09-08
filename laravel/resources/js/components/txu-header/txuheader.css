@@ -1,0 +1,15 @@
+.txu-header {
+    text-align: center;
+    background-color: #000000;
+    padding: 5px 0 ;
+    height: 60px;
+    display: table;
+    width: 100%;
+}
+.txu-header h1 {
+    color: white;
+    padding: 0;
+    margin: 0;
+    display: table-cell;
+    vertical-align: middle;
+}

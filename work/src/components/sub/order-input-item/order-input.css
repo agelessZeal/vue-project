@@ -1,0 +1,17 @@
+.component-placeorder-input .input-warp.error {
+  border-color: #e35555;
+}
+.component-placeorder-input .tip-wrap .tip {
+  color: #e35555;
+  line-height: 18px;
+}
+.component-placeorder-input .tip-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-size: 12px;
+  min-height: 18px;
+}

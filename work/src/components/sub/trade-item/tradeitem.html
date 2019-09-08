@@ -1,0 +1,11 @@
+<tr>
+    <td aria-colindex="1">
+        {{ (trade_time - time_offset) | formatTime}}
+    </td>
+    <td aria-colindex="2">
+        <div class="component-number" :class="getTradeType(trade_side)"><span>{{trade_price}}</span></div>
+    </td>
+    <td aria-colindex="3">
+        <div class="component-number"><span>{{trade_amount}}</span></div>
+    </td>
+</tr>

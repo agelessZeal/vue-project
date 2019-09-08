@@ -1,0 +1,60 @@
+#txu-latest-exec {
+    /*height: 700px;*/
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px 0 #ececec;
+    box-shadow: 0 0 20px 0 #ececec;
+}
+#txu-latest-exec .title {
+    padding-left: 20px;
+    padding-top: 6px;
+    font-size: 16px;
+    color: #27313e;
+    font-weight: 500;
+}
+#txu-latest-exec .deals-tabs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #22e6b8;
+    padding: 10px 20px 0;
+}
+#txu-latest-exec .deals-tabs .tab-item {
+    min-width: 42px;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 5px;
+    color: #898989;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 10px;
+}
+#txu-latest-exec .deals-tabs .tab-item.active {
+    color: #fff;
+    background-image: -webkit-gradient(linear,right top,left top,from(#22e6b8),to(#00c1ce));
+    background-image: linear-gradient(270deg,#22e6b8,#00c1ce);
+}
+#txu-latest-exec .title-table-wrap th {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f9f9f9;
+    font-size: 12px;
+    color: #27313e;
+    white-space: nowrap;
+}
+#txu-latest-exec .auth-table-wrap td,
+#txu-latest-exec .free-table-wrap td {
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    padding: 0;
+}
+#txu-latest-exec .auth-table-wrap thead,
+#txu-latest-exec .free-table-wrap thead {
+    display: none;
+}
+#txu-latest-exec .auth-table-wrap,
+#txu-latest-exec .free-table-wrap {
+  height: 910px;
+  overflow: hidden;
+}

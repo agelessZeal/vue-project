@@ -1,0 +1,162 @@
+<div id="txu-order-history">
+  <PageLoading :loadingDone="showAjaxProgress"/>
+  <div class="current-panel">
+    <div class="row-header">
+      <div>
+        <span>Current Orders</span>
+      </div>
+      <a href="" class="see-all" style="display: none">
+        <span>More</span>
+        <span> &gt;</span>
+      </a>
+    </div>
+    <div class="cmp-exchange-current">
+      <div>
+        <table aria-busy="false" aria-colcount="9" class="table-current table b-table">
+          <thead>
+            <tr>
+              <th aria-colindex="1">Order Time</th>
+              <th aria-colindex="2">Type</th>
+              <th aria-colindex="3">Side</th>
+              <th aria-colindex="4">Price({{baseCoin}})</th>
+              <th aria-colindex="5">Amount({{fiatCoin}})</th>
+              <th aria-colindex="6">Unexecuted({{fiatCoin}})</th>
+              <th aria-colindex="7">Executed({{fiatCoin}})</th>
+              <th aria-colindex="8">Avg. Price({{baseCoin}})</th>
+              <th aria-colindex="9"><span>Operation</span></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="order-table-wrapper" v-if="!isNoOrders">
+          <table aria-busy="false" aria-colcount="9" class="table-current table b-table">
+            <thead>
+            <tr style="visibility: collapse">
+              <th aria-colindex="1">Order Time</th>
+              <th aria-colindex="2">Type</th>
+              <th aria-colindex="3">Side</th>
+              <th aria-colindex="4">Price({{baseCoin}})</th>
+              <th aria-colindex="5">Amount({{fiatCoin}})</th>
+              <th aria-colindex="6">Unexecuted({{fiatCoin}})</th>
+              <th aria-colindex="7">Executed({{fiatCoin}})</th>
+              <th aria-colindex="8">Avg. Price({{baseCoin}})</th>
+              <th aria-colindex="9"><span>Operation</span></th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr v-for="curOrderItem in currentOrders">
+                <td>{{ (parseInt(curOrderItem.ctime) - time_offset) | formatOrderTime }}</td>
+                <td :class="getOrderTypeClass (curOrderItem.type)">{{ getOrderType(curOrderItem.type) }}</td>
+                <td :class="getOrderSideTypeClass(curOrderItem.side)">{{ getOrderSideType(curOrderItem.side) }}</td>
+                <td>{{ curOrderItem.price }}</td>
+                <td>{{ curOrderItem.amount }}</td>
+                <td>{{ Number(curOrderItem.amount - curOrderItem.deal_stock) | formatNumberPrice }}</td>
+                <td>{{ curOrderItem.deal_stock }}</td>
+                <td>{{ curOrderItem.price }}</td>
+                <td><a class="cur-hand cancel-current-order" v-on:click="onCancelOrder(curOrderItem.id)">Cancel</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="component-blank"  v-if="isNoOrders">
+        <i class="fa fa-folder-o"></i>
+        <span class="text">&nbsp;No content</span>
+      </div>
+    </div>
+  </div>
+  <div class="history-panel">
+    <div class="row-header">
+      <div>
+        <span>Order History</span>
+      </div>
+    </div>
+    <div class="history-order content">
+      <table aria-busy="false" aria-colcount="9" class="table-history table b-table">
+        <thead>
+          <tr>
+            <th aria-colindex="1">Execution Time</th>
+            <th aria-colindex="2">Type</th>
+            <th aria-colindex="3">Side</th>
+            <th aria-colindex="4">Price({{baseCoin}})</th>
+            <th aria-colindex="5">Amount({{fiatCoin}})</th>
+            <th aria-colindex="6">Executed Amount({{fiatCoin}})</th>
+            <th aria-colindex="7">Executed Value({{baseCoin}})</th>
+            <th aria-colindex="8">Avg. Price({{baseCoin}})</th>
+            <th aria-colindex="9">Operation</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="order-table-wrapper" v-if="!isNoHistory">
+        <table aria-busy="false" aria-colcount="9" class="table-history table b-table">
+          <thead>
+            <tr style="visibility: collapse">
+              <th aria-colindex="1">Execution Time</th>
+              <th aria-colindex="2">Type</th>
+              <th aria-colindex="3">Side</th>
+              <th aria-colindex="4">Price({{baseCoin}})</th>
+              <th aria-colindex="5">Amount({{fiatCoin}})</th>
+              <th aria-colindex="6">Executed Amount({{fiatCoin}})</th>
+              <th aria-colindex="7">Executed Value({{baseCoin}})</th>
+              <th aria-colindex="8">Avg. Price({{baseCoin}})</th>
+              <th aria-colindex="9">Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="curHistoryItem in executedHistory">
+              <td>{{ (parseInt(curHistoryItem.ctime) - time_offset) | formatOrderTime }}</td>
+              <td :class="getOrderTypeClass (curHistoryItem.type)">{{ getOrderType(curHistoryItem.type) }}</td>
+              <td :class="getOrderSideTypeClass(curHistoryItem.side)">{{ getOrderSideType(curHistoryItem.side) }}</td>
+              <td>{{ curHistoryItem.price }}</td>
+              <td>{{ curHistoryItem.amount }}</td>
+              <td>{{ curHistoryItem.deal_stock }}</td>
+              <td>{{ curHistoryItem.deal_money }}</td>
+              <td>{{ curHistoryItem.price }}</td>
+              <td>
+                <span class="cur-hand" :class="getOrderStatusClass(curHistoryItem.deal_stock)">
+                  {{ getOrderStatus(curHistoryItem.deal_stock) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="component-blank" v-if="isNoHistory">
+        <i class="fa fa-folder-o"></i>
+        <span class="text">&nbsp;No content</span>
+      </div>
+    </div>
+  </div>
+  <modal name="cancel-error-msg-modal" transition="nice-modal-fade" width="400" height="250">
+    <div class="modal-content sweet-alert">
+      <div class="sa-icon sa-error animateErrorIcon" style="display: block;">
+        <span class="sa-x-mark animateXMark">
+          <span class="sa-line sa-left"></span>
+          <span class="sa-line sa-right"></span>
+        </span>
+      </div>
+      <div class="v-modal-body">
+        <h2>{{cancelErrTitle}}</h2>
+        <p class="lead text-muted " style="display: block;">
+          {{cancelErrMsg}}
+        </p>
+      </div>
+    </div>
+  </modal>
+  <modal name="cancel-success-msg-modal" transition="nice-modal-fade" width="400" height="250">
+    <div class="modal-content sweet-alert">
+      <div class="sa-icon sa-success animateErrorIcon" style="display: block;">
+        <span class="sa-line sa-tip animateSuccessTip"></span>
+        <span class="sa-line sa-long animateSuccessLong"></span>
+        <div class="sa-fix"></div>
+      </div>
+      <div class="v-modal-body">
+        <h2>{{cancelSuccessTitle}}</h2>
+        <p class="lead text-muted " style="display: block;">
+          {{cancelSuccessMsg}}
+        </p>
+      </div>
+    </div>
+  </modal>
+</div>

@@ -1,0 +1,94 @@
+<div class="component-trade-depth">
+  <div class="merge-section">
+    <div class="depth-type">
+      <span class="ask" v-on:click="onShowAskDepth()"></span>
+      <span class="bid" v-on:click="onShowBidDepth()"></span>
+      <span class="all" v-on:click="onShowAskBid()"></span>
+    </div>
+    <div class="merge-option">
+      <span class="name">Merge: </span>
+      <select v-model="selected" class="form-control" v-on:change="onSelectMerge()" id="depth-merge-select">
+        <option v-for="mergeInfo in mergeOptions" :value="mergeInfo.value">{{ mergeInfo.label }}</option>
+      </select>
+    </div>
+  </div>
+  <table aria-busy="false" aria-colcount="3" class="title-depth-section table b-table">
+    <thead>
+    <tr>
+      <th aria-colindex="1" class="title-th abc">Price({{baseCoin}})</th>
+      <th aria-colindex="2" class="title-th">Amount({{fiatCoin}})</th>
+      <th aria-colindex="3" class="title-th">Total({{fiatCoin}})</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="depth-section" v-bind:class="{'multi':!singleMode,'single':singleMode}">
+    <div class="depths-wrap" v-bind:class="{'dn-table':askDnmode}">
+      <table aria-busy="false" aria-colcount="4" class="ask-table table b-table">
+        <thead>
+        <tr  style="visibility: collapse">
+          <th aria-colindex="1">0</th>
+          <th aria-colindex="2">1</th>
+          <th aria-colindex="3">2</th>
+          <th aria-colindex="4">3</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr v-for="askItem in asks" v-if="Number(askItem[1])>0"  v-on:click="selectMarketPrice(askItem[0])">
+            <td aria-colindex="1">
+              <div class="component-number"><span>{{askItem[0]}}</span></div>
+            </td>
+            <td aria-colindex="2">
+              <div class="component-number"><span>{{askItem[1] | formatAmount}}</span></div>
+            </td>
+            <td aria-colindex="3">
+              <div class="component-number">
+                <span class="holder">0</span><span>{{askItem[2] | formatTotalAmount}}</span>
+              </div>
+            </td>
+            <td aria-colindex="4">
+              <div class="percent ask" v-bind:style="{'width':askItem[3]+'%'}"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lastprice-wrap" :class="{'up':percentSign>=0,'down':percentSign<0}">
+      <span class="lastprice cur-hand">{{curMarketPrice | formatPriceTicker }}</span>
+      <i class="fa" :class="{'fa-arrow-up':percentSign>=0,'fa-arrow-down':percentSign<0}"></i>
+      <span class="legal" style="display: none">≈ 0.0052 USD</span>
+    </div>
+    <div class="depths-wrap"  :class="{'dn-table':bidDnmode}">
+      <div class="depths-wrap-inner">
+        <table aria-busy="false" aria-colcount="4" class="bid-table table b-table">
+          <thead>
+          <tr style="visibility: collapse">
+            <th aria-colindex="1">0</th>
+            <th aria-colindex="2">1</th>
+            <th aria-colindex="3">2</th>
+            <th aria-colindex="4">3</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bidItem in bids" v-if="Number(bidItem[1])>0"  v-on:click="selectMarketPrice(bidItem[0])">
+            <td aria-colindex="1">
+              <div class="component-number"><span>{{bidItem[0]}}</span></div>
+            </td>
+            <td aria-colindex="2">
+              <div class="component-number"><span>{{bidItem[1] | formatAmount}}</span></div>
+            </td>
+            <td aria-colindex="3">
+              <div class="component-number">
+                <span class="holder">0</span><span>{{bidItem[2] | formatTotalAmount}}</span>
+              </div>
+            </td>
+            <td aria-colindex="4">
+              <div class="percent bid" v-bind:style="{'width':bidItem[3]+'%'}"></div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

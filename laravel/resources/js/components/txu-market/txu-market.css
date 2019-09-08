@@ -1,0 +1,14 @@
+.table.b-table>tfoot>tr>th.sorting.sorting_asc:before,
+.table.b-table>tfoot>tr>th.sorting.sorting_desc:before,
+.table.b-table>thead>tr>th.sorting.sorting_asc:before,
+.table.b-table>thead>tr>th.sorting.sorting_desc:before {
+    right: .75em;
+    content: "\2193";
+}
+
+table.b-table>tfoot>tr>th.sorting_asc:after,
+table.b-table>tfoot>tr>th.sorting_desc:before,
+table.b-table>thead>tr>th.sorting_asc:after,
+table.b-table>thead>tr>th.sorting_desc:before {
+    opacity: 1;
+}

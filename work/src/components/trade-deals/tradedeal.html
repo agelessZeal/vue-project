@@ -1,0 +1,57 @@
+<div id="txu-latest-exec">
+    <h3 class="title">Latest Execution</h3>
+    <div class="deals-tabs">
+        <span class="tab-item cur-hand" :class="{' active':isMarketMode}" v-on:click="isMarketMode = true ">Market</span>
+        <span class="tab-item cur-hand" :class="{' active':!isMarketMode}" v-on:click="isMarketMode =  false">Mine</span>
+    </div>
+    <div class="title-table-wrap">
+        <table aria-busy="false" aria-colcount="3" class="table b-table">
+            <thead>
+                <tr>
+                    <th aria-colindex="1" class="">Time</th>
+                    <th aria-colindex="2" class="">Price({{fiatCoin}})</th>
+                    <th aria-colindex="3" class="">Amount({{fiatCoin}})</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="free-table-wrap" :class="{'hide-elem':!isMarketMode}">
+        <table aria-busy="false" aria-colcount="3" class="table b-table">
+            <thead>
+                <tr>
+                    <th aria-colindex="1">Time</th>
+                    <th aria-colindex="2">Price({{fiatCoin}})</th>
+                    <th aria-colindex="3">Amount({{fiatCoin}})</th>
+                </tr>
+            </thead>
+            <tbody>
+                <TradeItem v-for="trade in trades"
+                :key="trade.time"
+                :trade_time="trade.time"
+                :trade_side = "trade.type.toString()"
+                :trade_price="trade.price"
+                :trade_amount="trade.amount"/>
+            </tbody>
+        </table>
+    </div>
+    <div class="auth-table-wrap" :class="{'hide-elem':isMarketMode}">
+        <table aria-busy="false" aria-colcount="3" class="table b-table">
+            <thead class="">
+            <tr>
+                <th aria-colindex="1">Time</th>
+                <th aria-colindex="2">Price({{fiatCoin}})</th>
+                <th aria-colindex="3">Amount({{fiatCoin}})</th>
+            </tr>
+            </thead>
+            <tbody>
+                <TradeItem v-for="mineTrade in mineTrades"
+                     :key="mineTrade.time"
+                     :trade_time="mineTrade.time"
+                     :trade_side = "mineTrade.side.toString()"
+                     :trade_price="mineTrade.price"
+                     :trade_amount="mineTrade.amount"/>
+            </tbody>
+        </table>
+    </div>
+</div>

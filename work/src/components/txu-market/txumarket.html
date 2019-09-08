@@ -1,0 +1,93 @@
+<div id="txu-market">
+    <div class="search-box">
+        <div id="search-select" class="search-select search-container">
+            <!--https://www.npmjs.com/package/vuejs-auto-complete-->
+            <autocomplete
+                    ref="coinSearch"
+                    placeholder="coin"
+                    input-class="input form-control"
+                    @selected = "onSelectCoin"
+                    :source="coins">
+            </autocomplete>
+        </div>
+        <div class="option-wrap">
+            <div class="option">
+                <div role="radiogroup" tabindex="-1" class="radiogroup">
+                    <label class="custom-control custom-radio" v-on:click="onChangeValueMode(true)">
+                        <input type="radio" autocomplete="off" value="deal" checked="checked"
+                               class="custom-control-input" name="market_value_type">
+                        <span aria-hidden="true" class="custom-control-indicator"></span>
+                        <span class="custom-control-description">24H value</span>
+                    </label>
+                    <label class="custom-control custom-radio" v-on:click="onChangeValueMode(false)">
+                        <input type="radio" autocomplete="off" value="diff" class="custom-control-input"
+                               name="market_value_type">
+                        <span aria-hidden="true" class="custom-control-indicator"></span>
+                        <span class="custom-control-description">24H change</span>
+                    </label>
+                </div>
+            </div>
+            <label class="fav-checkbox cur-hand custom-control custom-checkbox">
+                <input type="checkbox" autocomplete="off" v-model="isFavoriteMode"
+                       class="custom-control-input">
+                <span aria-hidden="true" class="custom-control-indicator"></span>
+                <span class="custom-control-description">
+                    <span class="fav-text">show</span>
+                    <i class="fa fa-star"></i>
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="market-box">
+        <ul class="currency-tabs">
+            <li class="tab-item cur-hand" :class="{'active':baseCoin=='BTC'}" v-on:click="onChangeMarket('BTC')">BTC</li>
+            <li class="tab-item cur-hand" :class="{'active':baseCoin=='USDT'}" v-on:click="onChangeMarket('USDT')">USDT</li>
+        </ul>
+        <div class="title-table-wrap">
+            <table aria-busy="false" aria-colcount="3" class="table b-table">
+                <thead class="">
+                  <tr>
+                      <th tabindex="0" aria-colindex="1"  class="sorting th-dest" :class="getCoinSortClass()" v-on:click="onChangeSortingMode('coin')">
+                          Coin
+                      </th>
+                      <th tabindex="0" aria-colindex="2" class="sorting th-last"  :class="getPriceSortClass()" v-on:click="onChangeSortingMode('price')">
+                          Price
+                      </th>
+                      <th tabindex="0" aria-colindex="3" class="sorting "  :class="getValueSortClass()" v-on:click="onChangeSortingMode('value')">
+                          {{ (valueMode? "value":'change') }}
+                      </th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table aria-busy="false" aria-colcount="3" data-id="market-table" class="table b-table">
+                <thead class="">
+                <tr>
+                    <th tabindex="0" aria-colindex="1" aria-label="Click to sort Descending" class="sorting th-dest">
+                        Coin
+                    </th>
+                    <th tabindex="0" aria-colindex="2" aria-label="Click to sort Descending" class="sorting th-last">
+                        Price
+                    </th>
+                    <th tabindex="0" aria-colindex="3" aria-label="Click to sort Descending" class="sorting"
+                        :class="{'th-diff':!valueMode,'th-deal':valueMode}">
+                        {{ (valueMode? "value":'change') }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="">
+                <MarketItem v-for="marketInfo in marketOrders"
+                            :key="marketInfo.coin"
+                            :baseCoin="baseCoin"
+                            :marketName="marketInfo.coin"
+                            :isFavMode = "isFavoriteMode"
+                            :valueMode="valueMode"/>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

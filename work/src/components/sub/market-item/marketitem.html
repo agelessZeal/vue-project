@@ -1,0 +1,19 @@
+<tr class="cur-hand"  @click="onSelectedMarket()" v-if="getDisplayStatus()">
+    <td aria-colindex="1" class="td-dest">
+        <div class="name-wrap" :class="{'market-active':isSelected}">
+            <span class="component-market-fav cur-hand" :class="{checked:isFavorite}"></span>
+            <span class="name">{{marketName}}</span>
+        </div>
+    </td>
+    <td aria-colindex="2" class="td-last">
+        <div title="4,810.57 USD" class="price" :class="getRowColor()">
+            <div class="component-number"
+                 style="white-space:nowrap;width:94%;display:flex;flex-direction:row-reverse;"><!---->
+                <span class="float-right number">{{curPrice | formatNumber }}</span>
+            </div>
+        </div>
+    </td>
+    <td aria-colindex="3" :class="{'td-diff':!valueMode,'td-deal':valueMode}">
+        <span :class="getRowColor()">{{getMarketValue() | formatNumber}}{{ valueMode?"":"%" }}</span>
+    </td>
+</tr>

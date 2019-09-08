@@ -1,0 +1,31 @@
+<div id="ticker-panel">
+  <div>
+    <div class="price-section">
+      <span class="fav-market-pair cur-hand">
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+      </span>
+      <a rel="noopener" href="#" target="_blank" class="info">[i]</a>
+      <span class="coin">{{marketName}}</span><!----><!---->
+      <div class="price" :class="getRowColor()">{{curMarketPrice}}</div>
+      <div class="legal" style="display: none">0.0017 USD</div>
+    </div>
+    <div class="ticker-section">
+      <div class="item">
+        <p class="name">24H Change</p>
+        <p class="text" :class="getRowColor()">{{change24 | formatNumber}}%</p>
+      </div>
+      <div class="item">
+        <p class="name">24H Highest</p>
+        <p class="text">{{highest24}} {{baseCoin}}</p>
+      </div>
+      <div class="item"><p class="name">24H Lowest</p>
+        <p class="text">{{lowest24}} {{baseCoin}}</p></div>
+      <div class="item large">
+        <p class="name">24H Volume/Value</p>
+        <div class="text">
+          <span>{{volume24}}</span> {{fiatCoin}} / <span>{{value24}}</span> {{baseCoin}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

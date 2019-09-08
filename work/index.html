@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Trading Exchange UI</title>
+    <link href="https://lbx.sgbas.com/favicon.png" rel="shortcut icon">
+  </head>
+  <body>
+    <script>
+      var webToken = "testauth";
+      var webSource = "tradingview";
+      var userID = 49;
+      var apiURL = 'https://lbx.sgbas.com/api/exchange';
+      var Coins = [
+        {id: 0, name: 'BCHBTC', description: 'BCHBTC'},
+        {id: 1, name: 'LTCBTC', description: 'LTCBTC'},
+        {id: 2, name: 'ETHBTC', description: 'ETHBTC'},
+        {id: 3, name: 'ZECBTC', description: 'ZECBTC'},
+        {id: 4, name: 'XMRBTC', description: 'XMRBTC'},
+        {id: 5, name: 'BCHUSDT', description: 'BCHUSDT'},
+        {id: 6, name: 'LTCUSDT', description: 'LTCUSDT'},
+        {id: 7, name: 'ETHUSDT', description: 'ETHUSDT'},
+        {id: 8, name: 'ZECUSDT', description: 'ZECUSDT'},
+        {id: 9, name: 'XMRUSDT', description: 'XMRUSDT'}
+        ];
+      var marketOrders = [
+        {coin:'BCHBTC',price:0,value:0,percent:0},
+        {coin:'LTCBTC',price:0,value:0,percent:0},
+        {coin:'ETHBTC',price:0,value:0,percent:0},
+        {coin:'ZECBTC',price:0,value:0,percent:0},
+        {coin:'XMRBTC',price:0,value:0,percent:0},
+        {coin:'BCHUSDT',price:0,value:0,percent:0},
+        {coin:'LTCUSDT',price:0,value:0,percent:0},
+        {coin:'ETHUSDT',price:0,value:0,percent:0},
+        {coin:'ZECUSDT',price:0,value:0,percent:0},
+        {coin:'XMRUSDT',price:0,value:0,percent:0},
+      ];
+    </script>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+
+</html>

@@ -1,0 +1,361 @@
+#limit-market {
+    width: 100%;
+    /*height: 375px;*/
+    background-color: white;
+    -webkit-box-shadow: 0 0 20px 0 #ececec;
+    box-shadow: 0 0 20px 0 #ececec;
+}
+#limit-market .trade-section {
+    position: relative;
+    margin-top: 10px;
+    height: 375px;
+    overflow: hidden;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px 0 #ececec;
+    box-shadow: 0 0 20px 0 #ececec;
+}
+#limit-market .trade-section .trade-tabs {
+    position: relative;
+    border-bottom: 1px solid #52cbca;
+}
+#limit-market .trade-section .trade-tabs .fees-wrap {
+    padding: 10px 20px 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+#limit-market .trade-section .trade-tabs .fees-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: -4px;
+    text-align: right;
+}
+#limit-market .trade-section .trade-tabs .fees {
+    margin-left: 20px;
+    font-size: 12px;
+    color: #898989;
+}
+#limit-market .trade-section .trade-tabs .deductible {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #27313e;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+}
+#limit-market .trade-section .trade-tabs .tab-wrap {
+    width: 25%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+#limit-market .trade-section .trade-tabs .tab-item.active {
+    color: #fff;
+    background-image: -webkit-gradient(linear,right top,left top,from(#22e6b8),to(#00c1ce));
+    background-image: linear-gradient(270deg,#22e6b8,#00c1ce);
+}
+
+#limit-market .trade-section .trade-tabs .tab-item {
+    display: inline-block;
+    margin: 0 1%;
+    padding: 0 8px;
+    height: 30px;
+    min-width: 80px;
+    line-height: 30px;
+    color: #898989;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+}
+#limit-market .trade-section .trade-placeorder {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+.component-placeorder-limit ,
+.component-placeorder-market
+{
+    width: 50%;
+    padding: 6px 20px 17px;
+}
+.component-placeorder-available {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #898989;
+    padding-bottom: 5px;
+}
+.component-placeorder-input {
+    margin-top: 5px;
+}
+.component-placeorder-input .input-warp {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #f9f9f9;
+    height: 38px;
+    border: 1px solid transparent;
+}
+.component-placeorder-input .input-warp.focus {
+    border-color: #52cbca;
+}
+.component-placeorder-input .input-warp .number {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 9px 0 9px 9px;
+}
+.component-placeorder-input .input-warp .number .name-wrap {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.component-placeorder-input .input-warp .number .input {
+    background-color: #f9f9f9;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-left: 20px;
+    border: none;
+}
+.component-placeorder-input .input-warp .number .name-wrap .name {
+    color: #192330;
+}
+.component-placeorder-input .input-warp .number .name-wrap .coin {
+    color: #898989;
+    margin-left: 10px;
+}
+.component-placeorder-input .input-warp .number .input {
+    background-color: #f9f9f9;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-left: 20px;
+    border: none;
+}
+.component-placeorder-input .input-warp .control {
+    width: 20px;
+    border: 1px solid #ddd;
+}
+.component-placeorder-input .input-warp .control .plus {
+    border-bottom: 1px solid #ddd;
+}
+.component-placeorder-input .input-warp .control .minus,
+.component-placeorder-input .input-warp .control .plus {
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+.component-placeorder-limit .estimate-wrap {
+    padding-top: 20px;
+    font-size: 14px;
+}
+.component-placeorder-limit .estimate-wrap .name {
+    color: #27313e;
+}
+.component-placeorder-limit .submit-wrap {
+    padding-top: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.btn {
+    display: inline-block;
+    padding: 8px 24px;
+    padding: 8px 25.6px;
+    padding: .5rem 1.6rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-width: 260px;
+    height: inherit;
+    line-height: 48px;
+    color: #fff;
+    border-radius: 48px;
+    font-size: 22px;
+    background-size: 110%;
+    background-position-x: -5px;
+    cursor: pointer;
+}
+.btn-sm, .btn-sm.btn-outline-green {
+    line-height: 38px;
+    border-radius: 38px;
+}
+
+.btn-sm {
+    min-width: 180px;
+    font-size: 22px;
+}
+.btn-green {
+    background-color: #00b275;
+    border: none;
+}
+.btn-red {
+    background-color: #e45555;
+    border: none;
+}
+
+.component-placeorder-limit .submit-wrap .unclickable {
+    cursor: auto!important;
+}
+.component-placeorder-market .submit-wrap .unclickable {
+  cursor: auto!important;
+}
+.efficient-percent {
+    margin-top: 10px;
+}
+.component-placeorder-market .market-price {
+    font-size: 14px;
+    color: #898989;
+    padding: 34px 0 30px;
+}
+.component-placeorder-market .submit-wrap {
+    padding-top: 34px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+#limit-market .trade-section .unlogin-mask {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(23,35,48,.6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 22px;
+  color: #fff;
+}
+
+/*
+::Modal Style
+*/
+.sweet-alert .sa-icon.sa-error .sa-line.sa-left {
+  transform: rotate(45deg);
+  left: 17px;
+}
+.sweet-alert .sa-icon.sa-error .sa-line.sa-right {
+  transform: rotate(-45deg);
+  right: 16px;
+}
+.sweet-alert .sa-icon.sa-error .sa-line {
+  position: absolute;
+  height: 5px;
+  width: 47px;
+  background-color: #d9534f;
+  display: block;
+  top: 37px;
+  border-radius: 2px;
+}
+.sweet-alert .sa-icon.sa-error {
+  border-color: #d43f3a;
+}
+.sweet-alert .sa-icon {
+  width: 80px;
+  height: 80px;
+  border: 4px solid gray;
+  border-radius: 50%;
+  margin: 20px auto;
+  position: relative;
+  box-sizing: content-box;
+}
+.sweet-alert .sa-icon.sa-success {
+  border-color: #4cae4c;
+}
+.animateErrorIcon {
+  animation: animateErrorIcon 0.5s;
+}
+.sweet-alert .sa-icon.sa-error .sa-x-mark {
+  position: relative;
+  display: block;
+}
+
+.animateXMark {
+  animation: animateXMark 0.5s;
+}
+.v-modal-body{
+  width: 100%;
+}
+.v-modal-body h2{
+  font-weight: 300;
+  color: #555;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.v-modal-body p {
+  margin-bottom: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  font-size: 21px;
+  text-align: center;
+  color: #555;
+}
+.sweet-alert .sa-icon.sa-success .sa-line.sa-tip {
+  width: 25px;
+  left: 14px;
+  top: 46px;
+  transform: rotate(45deg);
+}
+
+.sweet-alert .sa-icon.sa-success .sa-line {
+  height: 5px;
+  background-color: #5cb85c;
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 2;
+}
+
+.sweet-alert .sa-icon.sa-success .sa-line.sa-long {
+  width: 47px;
+  right: 8px;
+  top: 38px;
+  transform: rotate(-45deg);
+}
+

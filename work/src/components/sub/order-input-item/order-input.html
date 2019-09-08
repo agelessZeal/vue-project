@@ -1,0 +1,19 @@
+<div class="component-placeorder-input">
+    <div class="input-warp" :class="{'error':is_err,'focus':is_selected}">
+        <label class="number">
+            <div class="name-wrap">
+                <span class="name">{{label_holder}}</span>
+                <span class="coin">{{coin_holder}}</span>
+            </div>
+            <input type="text" class="input" v-model="value"  @focus="selectInputForm()"  @blur="unSelectInputForm()">
+        </label>
+        <div class="control">
+            <div class="plus" v-on:click="incValue()">+</div>
+            <div class="minus" v-on:click="decValue()">-</div>
+        </div>
+    </div>
+    <div class="tip-wrap" v-visible="is_err" >
+        <p class="tip"  :class="{'error':is_err}">{{err_msg}}</p>
+        <p class="legal" style="display: none"> ≈ 5.6 USD</p>
+    </div>
+</div>

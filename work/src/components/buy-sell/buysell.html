@@ -1,0 +1,247 @@
+<div id="limit-market">
+    <PageLoading :loadingDone="showAjaxProgress"/>
+    <div class="trade-section">
+        <div class="trade-tabs">
+            <div class="fees-wrap">
+                <div class="fr deductible"></div>
+                <div class="fees-box">
+                    <div class="fees"><span>Maker: </span><span>0.1%</span></div>
+                    <div class="fees"><span>Taker: </span><span>0.1%</span></div>
+                </div>
+            </div>
+            <div class="tab-wrap">
+                <span class="tab-item cur-hand" :class="{'active':isLimitMode}" @click="onChangeMarketMode(true)">Limit</span>
+                <span class="tab-item cur-hand" :class="{'active':!isLimitMode}" @click="onChangeMarketMode(false)">Market</span>
+            </div>
+        </div>
+        <div class="trade-placeorder" v-show="isLimitMode">
+            <div class="component-placeorder-limit">
+                <div class="component-placeorder-available">
+                    <div>
+                        <span>Available: </span>
+                        <span class="cur-hand">{{this.baseCoinAmount}} {{this.baseCoin}}</span>
+                    </div>
+                    <a href="#">
+                        <span>deposit</span><span>&gt;</span>
+                    </a>
+                </div>
+                <OrderFormInput :label_holder="'Price'"
+                                :coin_holder="baseCoin"
+                                :value_step="0.00000001"
+                                :trade_type="'buy'"
+                                :market_type="'limit'"
+                                :is_err="buyPriceErr"
+                                :err_msg="buyPriceErrMsg"/>
+                <OrderFormInput ref="buyFiatCoin"
+                                :label_holder="'Amount'"
+                                :coin_holder="fiatCoin"
+                                :value_step="0.00000001"
+                                :market_type="'limit'"
+                                :trade_type="'buy'"
+                                :is_err="buyAmountErr"
+                                :err_msg="buyAmountErrMsg"/>
+                <div class="efficient-percent">
+                    <vue-slider ref="buySliderLimit"
+                                v-model="buy_value_limit"
+                                :disabled = "baseCoinAmount<=0"
+                                :data="sl_ops.data"
+                                :height="2"
+                                :slider-style="sl_ops.sliderStyleBuy"
+                                :process-style="sl_ops.processStyleBuy"
+                                :tooltip="false"
+                                :piecewise="true"
+                                :piecewiseLabel="true"
+                                :piecewise-style="sl_ops.piecewiseStyle"
+                                :piecewise-active-style="sl_ops.piecewiseActiveStyleBuy"
+                                @callback="changeSliderBuyLimit">
+                    </vue-slider>
+                </div>
+                <div class="estimate-wrap">
+                    <span class="name">EST. Value: </span>
+                    <span class="text">{{buyEstValue | formatNumber }} {{baseCoin}}</span>
+                </div>
+                <div class="submit-wrap">
+                    <button type="button" class="btn-sm btn btn-green"
+                            :class="{'unclickable':!isEnableBuyBtn}"
+                            style="width: 100%;"
+                            v-on:click="sendLimitBuyRequest">
+                      Buy {{fiatCoin}}
+                    </button>
+                </div>
+            </div>
+            <div class="component-placeorder-limit">
+                <div class="component-placeorder-available">
+                    <div>
+                        <span>Available: </span>
+                        <span class="cur-hand">{{this.fiatCoinAmount}} {{this.fiatCoin}}</span>
+                    </div>
+                    <a href="#" class="">
+                        <span>deposit</span>
+                        <span>&gt;</span>
+                    </a>
+                </div>
+                <OrderFormInput :label_holder="'Price'"
+                                :coin_holder="baseCoin"
+                                :value_step="0.00000001"
+                                :trade_type="'sell'"
+                                :market_type="'limit'"
+                                :is_err="sellPriceErr"
+                                :err_msg="sellPriceErrMsg"/>
+                <OrderFormInput :label_holder="'Amount'"
+                                :coin_holder="fiatCoin"
+                                :value_step="0.00000001"
+                                :market_type="'limit'"
+                                :trade_type="'sell'"
+                                :is_err="sellAmountErr"
+                                :err_msg="sellAmountErrMsg"/>
+                <div class="efficient-percent">
+                    <vue-slider ref="sellSliderLimit"
+                                v-model="sell_value_limit"
+                                :slider-style="sl_ops.sliderStyleSell"
+                                :data="sl_ops.data"
+                                :disabled = "fiatCoinAmount<=0"
+                                :height="2"
+                                :process-style="sl_ops.processStyleSell"
+                                :tooltip="false"
+                                :piecewise="true"
+                                :piecewiseLabel="true"
+                                :piecewise-style="sl_ops.piecewiseStyle"
+                                :piecewise-active-style="sl_ops.piecewiseActiveStyleSell"
+                                @callback="changeSliderSellLimit"
+                    ></vue-slider>
+                </div>
+                <div class="estimate-wrap">
+                    <span class="name">EST. Value: </span>
+                    <span class="text">{{sellEstValue | formatNumber}} {{baseCoin}}</span>
+                </div>
+                <div class="submit-wrap">
+                    <button type="button" class="btn-sm btn btn-red"
+                            :class="{'unclickable':!isEnableSellBtn}" v-on:click="sendLimitSellRequest"
+                            style="width: 100%;">Sell {{fiatCoin}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="trade-placeorder"  v-show="!isLimitMode">
+            <div class="component-placeorder-market">
+                <div class="component-placeorder-available">
+                    <div>
+                        <span>Available: </span>
+                        <span class="cur-hand">{{this.baseCoinAmount}} {{baseCoin}}</span>
+                    </div>
+                    <a href="#" class="">
+                        <span>deposit</span>
+                        <span>&gt;</span>
+                    </a>
+                </div>
+                <p class="market-price">
+                    <span>Buy in the order of current selling price</span>
+                </p>
+                <OrderFormInput :label_holder="'Value'"
+                                :coin_holder="baseCoin"
+                                :value_step="0.00000001"
+                                :trade_type="'buy'"
+                                :market_type="'market'"
+                                :is_err="marketBuyErr"
+                                :err_msg="marketBuyErrMsg"/>
+                <div class="efficient-percent">
+                    <vue-slider ref="buySliderMarket" v-if="!isLimitMode"
+                                v-model="buy_value_market"
+                                :data="sl_ops.data"
+                                :disabled = "baseCoinAmount<=0"
+                                :height="2"
+                                :slider-style="sl_ops.sliderStyleBuy"
+                                :process-style="sl_ops.processStyleBuy"
+                                :tooltip="false"
+                                :piecewise="true"
+                                :piecewiseLabel="true"
+                                :piecewise-style="sl_ops.piecewiseStyle"
+                                :piecewise-active-style="sl_ops.piecewiseActiveStyleBuy"
+                                @callback="changeSliderBuyMarket"
+                    ></vue-slider>
+                </div>
+                <div class="submit-wrap">
+                    <button type="button" class="btn-sm btn btn-green" v-on:click="sendMarketBuyRequest"
+                            :class="{'unclickable':!isEnableBuyBtn}" style="width: 100%;">Buy {{fiatCoin}}</button>
+                </div>
+            </div>
+            <div class="component-placeorder-market">
+                <div class="component-placeorder-available">
+                    <div>
+                        <span>Available: </span>
+                        <span class="cur-hand">{{this.fiatCoinAmount}} {{fiatCoin}}</span>
+                    </div>
+                    <a href="#" class=""><span>deposit</span>
+                        <span>&gt;</span>
+                    </a>
+                </div>
+                <p class="market-price">
+                    <span>Sell in the order of current buying price</span>
+                </p>
+                <OrderFormInput :label_holder="'Amount'"
+                                :coin_holder="fiatCoin"
+                                :value_step="0.00000001"
+                                :trade_type="'sell'"
+                                :market_type="'market'"
+                                :is_err="marketSellErr"
+                                :err_msg="marketSellErrMsg"/>
+                <div class="efficient-percent">
+                    <vue-slider ref="sellSliderMarket" v-if="!isLimitMode"
+                                v-model="sell_value_market"
+                                :slider-style="sl_ops.sliderStyleSell"
+                                :data="sl_ops_market.data"
+                                :disabled = "fiatCoinAmount<=0"
+                                :height="2"
+                                :process-style="sl_ops.processStyleSell"
+                                :tooltip="false"
+                                :piecewise="true"
+                                :piecewiseLabel="true"
+                                :piecewise-style="sl_ops.piecewiseStyle"
+                                :piecewise-active-style="sl_ops.piecewiseActiveStyleSell"
+                                @callback="changeSliderSellMarket"
+                    ></vue-slider>
+                </div>
+                <div class="submit-wrap">
+                    <button type="button" class="btn-sm btn btn-red"  v-on:click="sendMarketSellRequest"
+                            :class="{'unclickable':!isEnableSellBtn}" style="width: 100%;">Sell {{fiatCoin}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="unlogin-mask" :class="{'hide-elem':isLogin}">
+          <span>Please</span>&nbsp;
+          <a href="#" class="text-login">Sign in</a>&nbsp;/&nbsp;
+          <a href="#" class="text-register">Sign up</a>
+        </div>
+    </div>
+  <modal name="error-msg-modal" transition="nice-modal-fade" width="400" height="250">
+    <div class="modal-content sweet-alert">
+      <div class="sa-icon sa-error animateErrorIcon" style="display: block;">
+        <span class="sa-x-mark animateXMark">
+          <span class="sa-line sa-left"></span>
+          <span class="sa-line sa-right"></span>
+        </span>
+      </div>
+      <div class="v-modal-body">
+        <h2>{{tradeErrTitle}}</h2>
+        <p class="lead text-muted " style="display: block;">
+          {{tradeErrMsg}}
+        </p>
+      </div>
+    </div>
+  </modal>
+  <modal name="success-msg-modal" transition="nice-modal-fade" width="400" height="250">
+    <div class="modal-content sweet-alert">
+      <div class="sa-icon sa-success animateErrorIcon" style="display: block;">
+        <span class="sa-line sa-tip animateSuccessTip"></span>
+        <span class="sa-line sa-long animateSuccessLong"></span>
+        <div class="sa-fix"></div>
+      </div>
+      <div class="v-modal-body">
+        <h2>{{tradeSuccessTitle}}</h2>
+        <p class="lead text-muted " style="display: block;">
+          {{tradeSuccessMsg}}
+        </p>
+      </div>
+    </div>
+  </modal>
+</div>
+

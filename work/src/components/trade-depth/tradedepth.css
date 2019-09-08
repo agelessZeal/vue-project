@@ -1,0 +1,261 @@
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: button;
+}
+
+
+.component-trade-depth {
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px 0 #ececec;
+    box-shadow: 0 0 20px 0 #ececec;
+    width: 100%;
+    height: 100%;
+}
+.component-trade-depth .merge-section {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 20px;
+    height: 89px;
+}
+
+.component-trade-depth .merge-section .depth-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    white-space: nowrap;
+    padding-top: 20px;
+}
+.component-trade-depth .merge-section .merge-option {
+    margin-top: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.component-trade-depth .merge-section .depth-type .all,
+.component-trade-depth .merge-section .depth-type .ask,
+.component-trade-depth .merge-section .depth-type .bid {
+    width: 20px;
+    height: 17px;
+    display: inline-block;
+    margin-left: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.component-trade-depth .merge-section .depth-type .ask{
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARBAMAAAAvapGNAAAAGFBMVEVMaXHT09PS0tLT09PV1dXT09PjVVXS0tLLmNvOAAAABnRSTlMAgT+/NqTczTntAAAAM0lEQVQI12MohwOGAgYoYEdjKjMKABkgpgCCWQBkhiCYRhhMHIbBmGVpUJCOzCSoDeFeAB7EGrFq3caCAAAAAElFTkSuQmCC)}
+.component-trade-depth .merge-section .depth-type .bid{
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARBAMAAAAvapGNAAAAGFBMVEVMaXHT09PS0tLT09PV1dXT09PS0tIAsnXUtFF0AAAABnRSTlMAgT+/NqTczTntAAAAM0lEQVQI12NIgwOGBAYoYMPBTC+HgjJkJkFtQKYyowCQAWIKIJgJQGYIgmmEwcRmGMK9ACXrGVsVrZWIAAAAAElFTkSuQmCC)}
+.component-trade-depth .merge-section .depth-type .all{
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAATBAMAAABmV+C7AAAAMFBMVEVwcHBxcXFMaXH////jVVUAsnW3t7e4uLj19fXq6urf39/S0tJbtZZvb2/OhITMiIgs/aNmAAAAA3RSTlN/gQCHQ0K5AAAAWUlEQVQI12NQFIQBIQbechi4yMBmDAOFKGw+Fxj4iMJGU28xucPYeDKYbWGxeKax8WYw2xrItmxGsK2gbCuLyUDxxWh28YTCwEEUNi638abBwEUGBQYYYAIAhf45JchMyiwAAAAASUVORK5CYII=)
+}
+
+#depth-merge-select {
+    padding: 3px 5px 3px 5px;
+    margin-left: 5px;
+    background-color: #f9f9f9;
+}
+
+.component-trade-depth .title-depth-section .title-th {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f9f9f9;
+}
+.component-trade-depth .depth-section {
+  height: 755px;
+  overflow: hidden;
+}
+.component-trade-depth .depth-section .depths-wrap {
+  position: relative;
+  height: 300px;
+  -webkit-transition: all 400ms;
+  transition: all 400ms;
+}
+.component-trade-depth .depth-section .depths-wrap.dn-table {
+  height: 0!important;
+}
+.component-trade-depth .depth-section .lastprice-wrap.up {
+  color: #00b66f;
+}
+.component-trade-depth .depth-section .lastprice-wrap {
+  height: 40px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 10px 0 #ececec;
+  box-shadow: 0 0 10px 0 #ececec;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.component-trade-depth .depth-section .lastprice-wrap .lastprice {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+.component-trade-depth .depth-section .lastprice-wrap .legal {
+  margin-left: 10px;
+  color: #6f6f6f;
+  font-size: 13px;
+}
+.component-trade-depth .depth-section .depths-wrap td {
+  height: 29px;
+  padding: 0;
+  line-height: 29px;
+  font-size: 12px;
+  color: #6f6f6f;
+  cursor: pointer;
+}
+.component-number {
+  display: inline-block;
+}
+.component-trade-depth .depth-section .depths-wrap .td-precent,
+.component-trade-depth .depth-section .depths-wrap td:nth-child(4) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border: none;
+}
+.component-trade-depth .depth-section .depths-wrap th:first-child {
+  width: 37%;
+}
+.component-trade-depth .depth-section .depths-wrap th:nth-child(2) {
+  width: 31%;
+}
+.component-trade-depth .depth-section .depths-wrap th:nth-child(3) {
+  width: 32%;
+}
+.component-trade-depth .depth-section .depths-wrap th:nth-child(4) {
+  width: 0;
+}
+.component-trade-depth .depth-section .depths-wrap th {
+  height: 0;
+  line-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+}
+.component-trade-depth .depth-section.multi .ask-table,
+.component-trade-depth .depth-section.multi .bid-table {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.component-trade-depth .depth-section.multi .ask-table {
+  bottom: 0;
+}
+.component-trade-depth .depth-section.multi .bid-table {
+  top: 0;
+}
+.component-trade-depth .depth-section .depths-wrap .td-precent .percent.ask,
+.component-trade-depth .depth-section .depths-wrap td:nth-child(4) .percent.ask {
+  background-color: #e35555;
+}
+
+.component-trade-depth .depth-section .depths-wrap .td-precent .percent,
+.component-trade-depth .depth-section .depths-wrap td:nth-child(4) .percent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .2;
+}
+.component-trade-depth .depth-section .depths-wrap .td-precent .percent.bid,
+.component-trade-depth .depth-section .depths-wrap td:nth-child(4) .percent.bid {
+  background-color: #00b275;
+}
+
+.component-trade-depth .depth-section .depths-wrap .td-precent .percent,
+.component-trade-depth .depth-section .depths-wrap td:nth-child(4) .percent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .2;
+}
+
+.component-number .holder {
+  visibility: hidden;
+  z-index: -999;
+}
+.component-trade-depth .depth-section.multi .depths-wrap-inner {
+  height: 100%;
+  overflow: hidden;
+}
+.component-trade-depth .depth-section.single {
+  height: 610px;
+}
+
+
+@media (min-width: 1280px) {
+    .component-trade-depth .depth-section {
+      height: 740px;
+    }
+    .component-trade-depth .depth-section .depths-wrap {
+      max-height: 320px;
+      height: 310px;
+    }
+    .component-trade-depth .depth-section.single {
+      height: 756px;
+    }
+    .component-trade-depth .depth-section.single .depths-wrap {
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 570px;
+      height: auto;
+    }
+    .component-trade-depth .depth-section.single .depths-wrap {
+      height: auto;
+      max-height: 700px
+    }
+    .component-trade-depth .merge-section .depth-type {
+        padding-top: 0;
+    }
+    .component-trade-depth .merge-section .merge-option {
+        margin-top: 0;
+    }
+    .component-trade-depth .merge-section {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+        height: 49px;
+    }
+    .component-trade-depth .depth-section .lastprice-wrap {
+      height: 59px;
+    }
+    .component-trade-depth .depth-section .depths-wrap td {
+      height: 31px;
+    }
+}
+
